@@ -51,7 +51,15 @@ SayAll 在 Raw Input 精确匹配选定遥控器后才解码运输键，并将�
 
 不要为了本功能删除原有蓝牙配对、改动输入法私有文件或禁用系统键盘驱动。
 
-## 4. 从源码构建应用
+## 4. 获取应用：实验预览版或源码构建
+
+### 下载本 fork 的可执行文件
+
+打开 [本 fork 的 Releases](https://github.com/superuct/remote-mic-app-windows/releases)，选择标记为 Pre-release 的三键实验版。下载 EXE，或下载便携 ZIP 后完整解压；用 SHA256SUMS.txt 核对文件哈希。Release 不提供本机测试证书和驱动二进制，三键驱动仍按后续章节自行构建、签名、安装。
+
+先从旧版托盘菜单退出，再打开下载的 EXE。它内嵌页面，不需要 localhost 服务，也不会安装驱动。EXE 暂无 Authenticode 生产签名，遇到系统拦截应先核对来源和哈希，不要自动绕过安全提示。发行说明会标注实机未完成项；实验版不是全部功能验收通过的承诺。
+
+### 从源码构建应用
 
 开发环境：Git、Rust stable MSVC 工具链、Node.js 22+、项目指定的 pnpm、VS 2022 C++ 桌面工具与 Windows SDK。
 驱动开发还需下面第 5 节的 WDK。建议在 VS 的 **x64 Native Tools Command Prompt** 中打开 PowerShell，确保 `cl`、`link` 可用。
