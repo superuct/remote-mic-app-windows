@@ -1,5 +1,16 @@
 # 无线麦 SayAll for Windows
 
+## 此 fork 的用途与入口
+
+这里是 [superuct/remote-mic-app-windows](https://github.com/superuct/remote-mic-app-windows)，用于公开维护 RC001 返回、音量加减的可选驱动实现及操作说明。代码和文档在本 fork 维护，不要求向上游提交 PR。
+
+- **第一次使用**：[完整三键操作指南](docs/three-button-driver-guide.md)，涵盖环境准备、应用构建、驱动签名/安装、映射配置、测试、排错和回滚。
+- **已有问题**：[验证记录与尚未完成的项目](Testing/ThreeButtonDriver.md)。驱动已在 RC001 主机加载运行，三键最终动作与完整回归仍待验收。
+- **查看实现**：[驱动与管理工具](driver/SayAllThreeButtonFilter/README.md)，应用接入位于 `crates/sayall-windows/src/three_button_driver.rs`。
+- **基础配对与语音**：[基础配置指南](docs/installation-and-configuration.md)。上游下载说明仅用于理解基础功能，上游 Release 不等于本 fork 的三键测试版。
+
+本 fork 的可执行文件通过 [实验预览版 Releases](https://github.com/superuct/remote-mic-app-windows/releases) 提供，也可从源码构建。它是便携 EXE，不是正式签名安装器；三键驱动按完整指南自行构建和签名。应用内更新器仍沿用上游地址，测试本功能时不要用上游更新覆盖自己的构建。下方保留原项目介绍、来源与许可，历史适配结论不代表本 fork 新增驱动已经完成实机验收。
+
 <table>
   <tr>
     <td align="center">
@@ -35,12 +46,21 @@
 - Windows CI 可生成带 SHA-256 和来源元数据的未签名 NSIS Preview artifact；
 - Windows CI、来源归属和真机测试手册。
 
-RC001 与 RC003 均已完成 Windows 真机适配；两型号的按键映射真机验收均已通过，语音、安装器、VB-CABLE 和第三方输入法按测试手册分项记录，尚未覆盖的专项继续标记为 `deferred`。当前公开的 v0.2.2 是预览版，包含 updater minisign 签名，但尚无 Authenticode 代码签名，首次运行可能触发 SmartScreen 提示。
+RC001 与 RC003 均已完成 Windows 真机适配；既有按键映射路径的验收按历史测试记录保留；本分支新增的三键驱动不包含在该结论内，语音、安装器、VB-CABLE 和第三方输入法按测试手册分项记录，尚未覆盖的专项继续标记为 `deferred`。当前公开的 v0.2.2 是预览版，包含 updater minisign 签名，但尚无 Authenticode 代码签名，首次运行可能触发 SmartScreen 提示。
 
 ## 用户安装与配置
 
 首次安装、遥控器配对、VB-CABLE、语音输入软件、按键映射、更新和排障步骤见 [安装与配置指南](docs/installation-and-configuration.md)。文档同时给出了 AI Agent 的安全执行边界与可验证的完成标准。
 
+## 返回 / 音量加减：可选实验驱动
+
+本分支增加三键专用 HID 下层过滤驱动和应用接入。当前已完成 RC001 测试机器的驱动安装与运行检查；三键最终动作、闲置首按、语音回归和卸载回滚仍需实机验收，RC003 尚未独立验收。
+
+- [完整操作指南：构建、签名、安装、配置、测试、排错和回滚](docs/three-button-driver-guide.md)
+- [驱动源码与工具](driver/SayAllThreeButtonFilter/README.md)
+- [验证记录与已知问题](Testing/ThreeButtonDriver.md)
+
+基础语音不依赖这个驱动。它需要开发测试签名环境，不是生产签名驱动；旧 Release 未必含三键支持。独立应用使用 `scripts/build-local-app.ps1` 构建，显式内嵌前端，避免访问不存在的 localhost 开发服务器。
 ## 技术结构
 
 ```text
