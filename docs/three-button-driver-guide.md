@@ -1,7 +1,9 @@
 # 返回与音量加减：完整开源操作指南
 
 本文对应源码中的 **SayAllThreeButtonFilter 实验功能**。它是可选驱动，不是基础语音功能的依赖。
+本实现与说明在 [superuct 的 fork](https://github.com/superuct/remote-mic-app-windows) 独立维护，不向上游提交 PR。
 旧版本 Release 不一定含此功能；必须使用包含本目录与 `three_button_driver.rs` 的源码构建应用。
+应用内更新地址仍沿用上游；测试期间请保留本 fork 的构建，避免被上游版本覆盖。
 
 ## 1. 先了解当前完成程度
 
@@ -57,7 +59,7 @@ SayAll 在 Raw Input 精确匹配选定遥控器后才解码运输键，并将�
 ```powershell
 git clone --branch feature/three-button-driver https://github.com/superuct/remote-mic-app-windows.git
 cd remote-mic-app-windows
-# 以上为本功能开发分支；合入原仓库后也可从原仓库 main 构建。
+# 以上为本 fork 的功能分支，已包含驱动源码和完整说明。
 corepack enable
 corepack pnpm install --frozen-lockfile
 pnpm test
@@ -240,6 +242,6 @@ $testCert = New-SelfSignedCertificate -Type CodeSigningCert `
 ## 12. 开源贡献与发布边界
 
 - 应用使用仓库 GPL-3.0-only；驱动改编来源保留 MIT 许可全文，见 [ATTRIBUTION.md](../ATTRIBUTION.md)。品牌素材另有许可。
-- fork 后在功能分支提交，向原仓库 main 开 PR。保留来源、测试命令与 `passed / failed / deferred` 矩阵。
+- 在本 fork 的功能分支提交；问题与改进在本 fork 的 Issues/PR 中讨论，不要求向原仓库提交。保留来源、测试命令与 `passed / failed / deferred` 矩阵。
 - 可以公开源码和复现步骤；不提交签名私钥、测试机器证书、设备采集、个人配置或未经授权的第三方二进制。
 - 测试签名不能替代微软生产驱动签名。公开生产安装包需要独立签名、安装生命周期和两型号硬件验收。

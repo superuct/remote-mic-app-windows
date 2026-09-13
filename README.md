@@ -1,5 +1,16 @@
 # 无线麦 SayAll for Windows
 
+## 此 fork 的用途与入口
+
+这里是 [superuct/remote-mic-app-windows](https://github.com/superuct/remote-mic-app-windows)，用于公开维护 RC001 返回、音量加减的可选驱动实现及操作说明。代码和文档在本 fork 维护，不要求向上游提交 PR。
+
+- **第一次使用**：[完整三键操作指南](docs/three-button-driver-guide.md)，涵盖环境准备、应用构建、驱动签名/安装、映射配置、测试、排错和回滚。
+- **已有问题**：[验证记录与尚未完成的项目](Testing/ThreeButtonDriver.md)。驱动已在 RC001 主机加载运行，三键最终动作与完整回归仍待验收。
+- **查看实现**：[驱动与管理工具](driver/SayAllThreeButtonFilter/README.md)，应用接入位于 `crates/sayall-windows/src/three_button_driver.rs`。
+- **基础配对与语音**：[基础配置指南](docs/installation-and-configuration.md)。上游下载说明仅用于理解基础功能，上游 Release 不等于本 fork 的三键测试版。
+
+本 fork 目前提供实验源码与复现步骤，尚无独立的正式安装包发布。请从此仓库构建；应用内更新器仍沿用上游地址，测试本功能时不要用上游更新覆盖自己的构建。下方保留原项目介绍、来源与许可，历史适配结论不代表本 fork 新增驱动已经完成实机验收。
+
 <table>
   <tr>
     <td align="center">
